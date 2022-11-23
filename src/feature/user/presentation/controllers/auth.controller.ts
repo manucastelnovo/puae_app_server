@@ -7,9 +7,15 @@ export const signup = (req: Request, res: Response) => {
   res.send("signup");
 };
 
-export const signin = (req: Request, res: Response) => {
-  const resUser = userRepositoriesImplementationProvider.getUser();
-  res.send(resUser);
+export const signin = async (req: Request, res: Response) => {
+  try {
+    const resUser = await userRepositoriesImplementationProvider.getUser();
+    console.log(resUser);
+    res.json(resUser);
+    
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const profile = (req: Request, res: Response) => {

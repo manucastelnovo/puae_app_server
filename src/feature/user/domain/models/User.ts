@@ -7,9 +7,9 @@ enum USERTYPE {
 }
 
 export interface User {
-  userId?: id;
-  name?: string;
-  correo?: string;
-  password?: password;
-  userType?: USERTYPE;
+  userId: id;
+  name: string;
+  correo: string;
+  password: password;
+  userType: USERTYPE;
 }
