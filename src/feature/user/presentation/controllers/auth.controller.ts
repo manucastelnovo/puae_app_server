@@ -30,7 +30,9 @@ export const profile = (req: Request, res: Response) => {
 export const user = async (req: Request, res:Response)=>{
 
   try {
-    const resUser = await usersRepository.getUser('1');
+    console.log(req.params.name);
+    
+    const resUser = await usersRepository.getUser(req.params.name);
     res.send(resUser);
   } catch (error) {
     throw (error)

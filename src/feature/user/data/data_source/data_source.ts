@@ -33,8 +33,8 @@ export class PGUsersDataSource implements UsersDataSource{
         return PGUsersDataSource.instance;
     }
 
-    async getUser(id: string): Promise<User> {
-        return await this.callDataBase(`SELECT * FROM puae.users WHERE id = $1;`, [id], (result) => {
+    async getUser(name: string): Promise<User> {
+        return await this.callDataBase(`SELECT * FROM puae.users WHERE name = $1;`, [name], (result) => {
             console.log(result);
             console.log('hola');
             if (result.rowCount === 0) {
