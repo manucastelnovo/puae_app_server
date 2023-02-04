@@ -1,0 +1,1 @@
+export const SELECT_USER_QUERY = `SELECT * FROM puae.user WHERE id = $1;`;

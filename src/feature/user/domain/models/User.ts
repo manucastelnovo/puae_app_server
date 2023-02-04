@@ -1,15 +1,16 @@
 type password = string | number;
-type id = string | number;
+type id = number;
 
-enum USERTYPE {
-  ADMIN = "admin",
-  EMPLOYEE = "employee",
-}
+
 
 export interface User {
-  userId: id;
+  userId: number;
   name: string;
-  correo: string;
+  email: string;
   password: password;
-  userType: USERTYPE;
+  userType: string;
 }
+
+export interface CreateUser extends Omit<User, 'userId'> {}
+
+export interface UpdateUser extends Partial<User> {}
