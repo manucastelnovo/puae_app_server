@@ -1,9 +1,19 @@
-import app from "./app";
+import express from "express"
+import cors from "cors"
+import {config} from "./core/config/config"
+import {configureRouting} from './core/routing/index'
 
-import "./database";
+const app = express();
+app.use(express.json());
+app.use(cors({origin:[]}))
 
-function main() {
-  console.log("Server on port", app.get("port"));
-  app.listen(app.get("port"));
-}
-main();
+configureRouting(app);
+
+// app.use(authHandler);
+
+// app.use(logError);
+// app.use(errorHandler);
+
+app.listen(config.port, ()=>{
+    console.log(`Server Running at Port ${config.port}`);
+});
