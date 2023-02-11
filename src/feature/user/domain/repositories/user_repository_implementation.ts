@@ -22,7 +22,7 @@ export class UserRepositoriesImplementation implements UserRepositories {
           return await this.usersDataSource.getUser(name);
   })
   }
-  async createdUser(data: CreateUser): Promise<User> {
+  async createUser(data: CreateUser): Promise<User> {
     return await this.callDataSource(() => this.usersDataSource.createUser(data));
   }
   updateUser(user: User): Promise<Boolean> {
