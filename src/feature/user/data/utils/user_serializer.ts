@@ -7,6 +7,6 @@ export const userFromPG = (item: any): User => {
         name: item.name,
         email: item.email,
         password: item.password,
-        userType: item.user_type
+        
     }
 }
