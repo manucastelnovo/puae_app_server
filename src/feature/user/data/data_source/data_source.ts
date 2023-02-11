@@ -1,7 +1,7 @@
 import { CreateUser, User } from 'feature/user/domain/models/User';
-import {Pool,PoolClient,QueryResult} from 'pg';
+import {Pool,PoolClient,QueryResult} from 'pg'; 
 import { UsersDataSource } from '../interfaces/user_data_source';
-// import  {SELECT_USER_QUERY}  from '../querys_scripts/queries';
+import  {SELECT_USER_QUERY,INSERT_USER_QUERY}  from '../querys_scripts/queries';
 import { userFromPG } from '../utils/user_serializer';
 
 export class PGUsersDataSource implements UsersDataSource{
@@ -10,13 +10,7 @@ export class PGUsersDataSource implements UsersDataSource{
         this.db = db;
     }
     async createUser(data: CreateUser): Promise<User> {
-        return await this.callDataBase(`
-        INSERT INTO puae.users (name, email, password, user_type)
-        VALUES ($1, $2, $3, $4)
-        RETURNING *;
-        `, [data.name,data.email,data.password,data.userType], (result) => {
-            console.log(result);
-            console.log('hola');
+        return await this.callDataBase(INSERT_USER_QUERY, [data.name,data.email,data.password], (result) => {
             if (result.rowCount === 0) {
                 throw new Error;
             }
@@ -34,7 +28,7 @@ export class PGUsersDataSource implements UsersDataSource{
     }
 
     async getUser(name: string): Promise<User> {
-        return await this.callDataBase(`SELECT * FROM puae.users WHERE name = $1;`, [name], (result) => {
+        return await this.callDataBase(SELECT_USER_QUERY, [name], (result) => {
             console.log(result);
             console.log('hola');
             if (result.rowCount === 0) {
