@@ -1,6 +1,8 @@
 import { CreateUser, User } from "feature/user/domain/models/User";
 import { UserRepositories } from "./user_repositories";
 import { UsersDataSource } from "feature/user/data/interfaces/user_data_source";
+import { CustomError } from "core/error/custom_error";
+import { GenericError } from "core/error/generic_error";
 
 export class UserRepositoriesImplementation implements UserRepositories {
   private usersDataSource: UsersDataSource;
@@ -36,7 +38,10 @@ export class UserRepositoriesImplementation implements UserRepositories {
         try {
             return await callback();
         } catch (error) {
+          if (error instanceof CustomError) {
             throw error;
+          }
+            throw new GenericError("User Repository error");
         }
     }
 }
