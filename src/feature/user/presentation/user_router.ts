@@ -1,7 +1,4 @@
 import express, { Request, Response } from "express";
-import {UserRepositoriesImplementation} from './../domain/repositories/user_repository_implementation'
-import { pool } from "./../../../core/service/database_service";
-import { PGUsersDataSource } from './../../user/data/data_source/data_source';
 import { UserRepositories } from "../domain/repositories/user_repositories";
 import { User } from "../domain/models/User";
 
@@ -12,8 +9,6 @@ export default function UsersRouter(usersRepository:UserRepositories){
     router.get('/:name', async (req: Request, res:Response)=>{
 
         try {
-          
-          
           const resUser = await usersRepository.getUser(req.params.name);
           res.send(resUser);
         } catch (error) {
