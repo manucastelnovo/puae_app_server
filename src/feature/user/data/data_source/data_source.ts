@@ -1,5 +1,5 @@
 import { CustomError } from 'core/error/custom_error';
-import { DatabaseError } from 'core/error/databases_error';
+import { DatabaseError } from 'core/error/databases';
 import { NotFoundError } from 'core/error/not_fount_error';
 import { CreateUser, User } from 'feature/user/domain/models/User';
 import {Pool,PoolClient,QueryResult} from 'pg'; 
