@@ -1,3 +1,6 @@
+import { CustomError } from 'core/error/custom_error';
+import { DatabaseError } from 'core/error/databases_error';
+import { NotFoundError } from 'core/error/not_fount_error';
 import { CreateUser, User } from 'feature/user/domain/models/User';
 import {Pool,PoolClient,QueryResult} from 'pg'; 
 import { UsersDataSource } from '../interfaces/user_data_source';
@@ -29,10 +32,8 @@ export class PGUsersDataSource implements UsersDataSource{
 
     async getUser(name: string): Promise<User> {
         return await this.callDataBase(SELECT_USER_QUERY, [name], (result) => {
-            console.log(result);
-            console.log('hola');
             if (result.rowCount === 0) {
-                throw new Error;
+                throw new NotFoundError('User');
             }
             return userFromPG(result.rows[0]);
         });
@@ -45,14 +46,16 @@ export class PGUsersDataSource implements UsersDataSource{
         try {
             const response = await client.query(query, values);
             return callback(response);
-        } catch(err) {
-            throw err;
-        } finally {
-            if (client){
-                client.release()
+        } catch (error) {
+            if (error instanceof CustomError) {
+              throw error;
             }
+            throw new DatabaseError(error as Error);
+          } finally {
+            if (client) {
+              client.release();
+            }
+          }
         }
-    }
-
-}
+      }
 
