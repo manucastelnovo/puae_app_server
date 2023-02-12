@@ -1,8 +1,8 @@
 import { CreateUser, User } from "feature/user/domain/models/User";
 import { UserRepositories } from "./user_repositories";
 import { UsersDataSource } from "feature/user/data/interfaces/user_data_source";
-import { CustomError } from "core/error/custom_error";
-import { GenericError } from "core/error/generic_error";
+import { CustomError } from './../../../../core/error/custom_error';
+import { GenericError } from "./../../../../core/error/generic_error";
 
 export class UserRepositoriesImplementation implements UserRepositories {
   private usersDataSource: UsersDataSource;
