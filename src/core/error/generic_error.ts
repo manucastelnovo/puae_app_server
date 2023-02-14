@@ -1,4 +1,4 @@
-import { CustomError } from "./custom_error";
+import { CustomError } from './../error/custom_error';
 
 export class GenericError extends CustomError {
   statusCode: 500;

@@ -16,7 +16,7 @@ export default function UsersRouter(usersRepository:UserRepositories){
         }
       });
     
-    router.post("/register", async (req: Request, res: Response) => {
+    router.post("/", async (req: Request, res: Response) => {
         const router = express.Router();
         try {
           console.log(req.body);

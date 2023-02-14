@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import { FoodRepositories } from "../domain/repositories/food_repositories";
 import { Food } from "../domain/models/food";
+import { NotFoundError } from "./../../../core/error/not_fount_error";
 
 
 export default function FoodsRouter(foodsRepository:FoodRepositories){
@@ -18,7 +19,7 @@ export default function FoodsRouter(foodsRepository:FoodRepositories){
         }
       });
     
-    router.post("/register", async (req: Request, res: Response) => {
+    router.post("/", async (req: Request, res: Response) => {
         const router = express.Router();
         try {
           console.log(req.body);
@@ -26,7 +27,7 @@ export default function FoodsRouter(foodsRepository:FoodRepositories){
             await foodsRepository.createFood(newFood);
             res.status(201).send(newFood);
         } catch (err) {
-            throw(err);
+            throw new NotFoundError(err as string);
         }
     });
     return router;
