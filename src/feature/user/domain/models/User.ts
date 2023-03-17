@@ -4,7 +4,7 @@ export interface User {
   userId: number;
   name: string;
   email: string;
-  password: password;
+  password: string;
 }
 
 export interface CreateUser extends Omit<User, 'userId'> {}
