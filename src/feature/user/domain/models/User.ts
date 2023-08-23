@@ -7,6 +7,6 @@ export interface User {
   password: string;
 }
 
-export interface CreateUser extends Omit<User, 'userId'> {}
+export interface CreateUser extends Omit<User, "userId"> {}
 
 export interface UpdateUser extends Partial<User> {}
